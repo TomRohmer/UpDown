@@ -22,6 +22,12 @@ You can install the latest released version from CRAN with:
 install.packages("UpDown")
 
 ```
+or the latest development version:
+
+```
+#install.packages("remotes")
+remotes::install_github("TomRohmer/UpDown")
+```
 
 Usage
 ----------
