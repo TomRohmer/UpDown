@@ -1,5 +1,8 @@
 validation<-function(est,tab_down, scale,k=k, pert,pert_underscale,h.int=h.int,threshold,thr_va=0.5,n=n)
 {
+  pert_underscale<-as.vector(pert_underscale)
+  pert<-as.vector(pert)
+  
   tab<-NULL
   for(g in pert)
   {
@@ -7,14 +10,12 @@ validation<-function(est,tab_down, scale,k=k, pert,pert_underscale,h.int=h.int,t
     intra=unique(get(scale[2],pos=submatrix))
     index= which(est$names_lev[[k+1]] %in% intra) 
     dd=est$med_lev[[k+1]][index,]
-    #T=as.numeric(colnames(dd))
     outcome=apply(dd,1,moment.estimation,h.int=h.int,th=threshold[2],n=n)
-    #moment.estimation(dd[1,],time=T,h.int=h.int,th=threshold[2],n=n)
-    #names(outcome)=intra
+
     x=unlist(lapply(outcome,"[",1)) ##start
-    #x1=unlist(lapply(outcome,"[",2)) ##start before
+    #x1=unlist(lapply(outcome,"[",2)) ##start before (other strategy not considered yet)
     x2=unlist(lapply(outcome,"[",3)) ##end
-    #x3=unlist(lapply(outcome,"[",4)) ##end of reaction
+    #x3=unlist(lapply(outcome,"[",4)) ##end of reaction (not considered yet)
     x4=unlist(lapply(outcome,"[",5)) ##intensity
     
     if (length(unique(round(x)))==1){
@@ -24,14 +25,14 @@ validation<-function(est,tab_down, scale,k=k, pert,pert_underscale,h.int=h.int,t
     } else {
       
       mc <- Mclust(round(x),verbose=FALSE)
-      tmc=data.frame(table(mc$classification)) #table mc
+      tmc=data.frame(table(mc$classification)) #mc table
 
       tmc$name<-rep(g,length(tmc$Var1))
       tmc$intensity<-tmc$end<-tmc$start<-rep(0,length(tmc$Var1))
       
-      if (nrow(tmc)!=1){ ###ne pas compter 2 fois une pen qui a 2 perturbations dans le meme cluster
+      if (nrow(tmc)!=1){ ###Do not count 2 times a same disturbance having 2  starting points in a same cluster 
         for (cla in tmc$Var1){
-          names_cla=names(mc$classification[mc$classification==cla]) ##start dans la classe cla
+          names_cla=names(mc$classification[mc$classification==cla]) ##starting point in class cla
           bb= matrix(unlist(strsplit(names_cla,".", fixed=TRUE)),2,length(names_cla))
           
           tmc$Freq[tmc$Var1==cla]=length(unique(bb[1,]))
@@ -75,11 +76,11 @@ validation<-function(est,tab_down, scale,k=k, pert,pert_underscale,h.int=h.int,t
     tab<-rbind(tab,tmc)
     if(nrow(tmc)>=1){
       multip_pert<-matrix(unlist(strsplit(names(x),".", fixed=TRUE)),2,length(names(x)))
-      nmp<-names(which(table(multip_pert[1,])>1))
+      nmp<-as.vector(names(which(table(multip_pert[1,])>1)))
       pert_underscale<-c(pert_underscale,nmp)
     }
     if(nrow(tmc)==0){
-     rec_pert<-intra[which(intra %in% est$mixing[[k+1]])]
+     rec_pert<-as.vector(intra[which(intra %in% est$mixing[[k+1]])])
      pert_underscale<-c(pert_underscale,rec_pert)
     }
   }#end else
