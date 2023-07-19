@@ -17,7 +17,7 @@
   }
   \item{levels}{a vector of character strings specifing the column names corresponding to the considered hierarchical levels appearing in the dataframe \code{data}, ordered from the highest  hierarchical level to the lowest hierarchical level (i.e., the unit level)
   }
-  \item{obs}{character string specifing the column names of the considered observations appearing in the data frame \code{data}.
+  \item{obs}{character string specifing the column names of the considered numeric observations appearing in the data frame \code{data}.
   }
   \item{vtime}{character string specifing the column names of the considered time variable appearing in the data frame \code{data}.
   }

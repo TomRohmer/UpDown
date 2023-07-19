@@ -7,6 +7,9 @@ Up<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,
              options=list())
 {
  
+  ##replace colnames with space by '.'
+  colnames(data)<-str_replace_all(colnames(data)," ",".")
+  levels<-str_replace_all(levels," ",".")
   nl<-length(levels)
   
   #default control parameters
@@ -45,7 +48,7 @@ Up<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,
 
   
   if(!con$notest){
-    
+  if(!is.numeric(get(obs,pos=data.ex))) stop(paste(obs,"is not numeric"))
   if(nl>1)
     for(i in 1:(nl-1)){
       if(length(unique(get(levels[i])))<4) stop(paste("Not enough elements in",levels[i],"level. Minimum allowed is 4",sep=" "),call. = FALSE)
