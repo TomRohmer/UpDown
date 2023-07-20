@@ -19,6 +19,8 @@ The function starts a shiny app which visualizes the data organized by the hiera
   
 }
 
+\value{No return value, run the application}
+
 \seealso{
 \code{\link[=shiny]{shiny()}}, \code{\link[=ggplot2]{ggplot2()}}, \code{\link[=UpDown]{UpDown()}}
 }
@@ -32,9 +34,8 @@ data=get(data(PigFarming))
 levels=c("batch","pen","id")
 updown.out<- UpDown(data,levels=levels, vtime="time", obs="weight",
 kappa=0.75, thr_va=0.5, correction="age")
-}
-\dontrun{
-UpDownApp(updown.out)
+
+if(interactive()){UpDownApp(updown.out)}
 }
 }
 
