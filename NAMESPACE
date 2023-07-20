@@ -3,16 +3,11 @@ export(UpDown,UpDownApp)
 
 #functions used in the package
 importFrom("mixtools","normalmixEM")
-#importFrom("mvtnorm","rmvnorm")
 importFrom("mclust","Mclust","mclustBIC")
-#importFrom("stringr","str_split")
 importFrom("reshape2","dcast")
 importFrom("dplyr","group_by","n","summarise","%>%","summarise_at","mutate")
-#importFrom(Rdpack,reprompt)
-#importFrom("grDevices")
 importFrom("graphics", "abline", "lines", "par")
+importFrom("utils", "tail")
 
 #packages
-#import(stats, dplyr, stringr, splines, mixtools, reshape2, raster, orthopolynom, segmented, e1071, mclust, igraph, forecast )
 import(stats,shiny,ggplot2)
-importFrom("utils", "tail")
