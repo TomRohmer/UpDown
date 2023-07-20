@@ -10,7 +10,6 @@ names_lev<-rev(updown.out$names_lev)
 med_lev<-rev(updown.out$med_lev)
 sc.x_lev<-rev(updown.out$sc.x_lev)
 sc.y_lev<-rev(updown.out$sc.y_lev)
-#n=nrow(med_lev[[3]])
 
 data=updown.out$data
 
@@ -28,7 +27,6 @@ ui<-navbarPage("Shiny disturbance",
              tabPanel("Plot",
 
                       # Application title
-                      #titlePanel(paste("plot of detected", stringr:::str_c(levels[1:(nl-1)], collapse=", "), "and individual disturbances",sep=" ")),
                       titlePanel(paste("Plot of detected group and individual disturbances")),
                       
                       # Sidebar with a slider input for number of bins
@@ -56,12 +54,8 @@ ui<-navbarPage("Shiny disturbance",
                       conditionalPanel(
                         condition = "nl ==1",
                         lapply(1, function(i) { if(nl==1)
-                        #sliderInput("lev1", levels[nl],
-                        #              min=1,step=1,max=length(unique(index)),value=1)
-                          selectInput("lev1", levels[nl], choices = unique(get(levels[nl],pos=data)))
-                          #textInput("lev1", levels[nl], value = paste(get(levels[nl],pos=data)[1]))  
+                        selectInput("lev1", levels[nl], choices = unique(get(levels[nl],pos=data)))
                         }),
-                        #get(levels[nl],pos=data)
                         selectInput("correction", "Use corrected observations?",
                                     choices = c("Original observations"="No","Corrected observations"="Yes"))
                         
@@ -192,7 +186,6 @@ server<-function(input, output) {
 
   temp<-reactive({
     temp<-list(temp1=input[["ilevel"]], temp2=input[["element"]])
- #cat("level=",temp[[1]],"element=",temp[[2]],"\n")
  temp
   })
   # 
@@ -222,8 +215,7 @@ server<-function(input, output) {
     lines(sc.x_lev[[k]][names_lev[[k]]==tt,],sc.y_lev[[k]][names_lev[[k]]==tt,],col="red")
     abline(v=dist$start,lty=2,col = "red")
     abline(v=dist$end,lty=2,col = "blue")
-    #abline(h=0,lty=2,col = "black")
-    
+
       }
   })
 
