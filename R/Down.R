@@ -43,7 +43,7 @@ Down<-function(est,h.int=10, kappa=NULL, thr_va=0.5)
     ind<-get(levels[nl],pos=subset(tab_down, get(levels[nl],pos=tab_down)==g))
     index= which(est$names_lev[[nl]] %in% ind)   
     dd=est$yp[index,]
-    #tt=as.numeric(colnames(dd))
+
     outcome<-moment.estimation(dd,h.int=h.int,th=thr[nl],n=n)
     
     npoint=length(outcome$M0)
