@@ -1,10 +1,7 @@
 UpDown<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,kappa=NULL, thr_va=0.5,
                  options=list())
 {
-  
-   # if(is.null(levels)) stop("you have to specify levels")
-  #  if(is.null(trait)) stop("you have to specify trait")
-  
+
   if(!is.vector(levels)) stop("levels must be a vector of character strings",call. = FALSE)
   
   if(sum(is.na(get(vtime,pos=data)))>0) warning(paste(sum(is.na(get(vtime, pos=data))),"rows were removed of the original dataset due to missing times"))
