@@ -189,12 +189,12 @@ Up<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,
   if(mixplot==TRUE)
   {
     opar<-par(mfrow=c(1,nl))
+    on.exit(par(opar))
     for(k in 1:nl){
       if(!inherits(mixmdl[[k]],"try-error")){
         plot(mixmdl[[k]], which = 2,breaks=30,main2=levels[k])
         abline(v=thr[k],lty=2,col="blue")}
     }
-    on.exit(par(opar))
   }
   
 

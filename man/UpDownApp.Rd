@@ -34,8 +34,9 @@ data=get(data(PigFarming))
 levels=c("batch","pen","id")
 updown.out<- UpDown(data,levels=levels, vtime="time", obs="weight",
 kappa=0.75, thr_va=0.5, correction="age")
+}
 
 if(interactive()){UpDownApp(updown.out)}
-}
+
 }
 

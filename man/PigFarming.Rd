@@ -6,7 +6,6 @@ Simulated longitudinal phenotypes that mimics a pig-farming dataset subsected to
 }
 \description{
 Example of a dataset on which UpDown can be applied. It consists in simulated hierarchical data mimicking a pig farming-system dataset subsected to disturbances. The animals (id) were raised in 40 batches and in 15 pens within each batch leading to 15 animals per pen. Hence three hierarchical level are considered: id, pen and batch levels.  Data were simulated following Le et al. 2022. <doi.org/10.1016/j.animal.2022.100496>
-%%  ~~ A concise (1-5 lines) description of the dataset. ~~
 }
 \usage{data("PigFarming")}
 \format{
