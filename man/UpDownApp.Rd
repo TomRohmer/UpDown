@@ -28,11 +28,8 @@ The function starts a shiny app which visualizes the data organized by the hiera
 
 \examples{
 \donttest{
-# load data
-data=get(data(PigFarming))
-
 levels=c("batch","pen","id")
-updown.out<- UpDown(data,levels=levels, vtime="time", obs="weight",
+updown.out<- UpDown(PigFarming,levels=levels, vtime="time", obs="weight",
 kappa=0.75, thr_va=0.5, correction="age")
 }
 
