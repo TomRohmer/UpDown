@@ -69,9 +69,10 @@ Up<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,
     
     
   }else  data$cobs<-get(obs,pos=data)
-  ytest<-dcast(data[,c(levels[nl],"cobs",vtime)],get(levels[nl])~get(vtime),value.var="cobs",fun.aggregate=length)
+  ytest<-table(data[,c(levels[nl],vtime)])
+  
   if(sum(apply(ytest[,-1],2,max)>1)) stop(sum(apply(ytest[,-1],2,max)>1)," ",levels[nl]," have duplicate times",call. = FALSE)
-  y<-dcast(data[,c(levels[nl],"cobs",vtime)],get(levels[nl])~get(vtime),value.var="cobs")
+  y=spread( data[,c(levels[nl],"cobs",vtime)] ,get(vtime),"cobs")
   
   ind<-y[,1]
   y<-y[,-1]
@@ -96,7 +97,8 @@ Up<-function(data,levels,obs,vtime, h.int=NULL,mixplot=FALSE, correction=NULL,
       if(sum(med_levk$nb<=(median(med_levk$nb)*0.5))>0) #if existing
       med_levk[med_levk$nb<=(median(med_levk$nb)*0.5),]$cobs<-NA
       
-      med_lev[[k]]<-dcast(med_levk[,c(levels[k],"cobs",vtime)],get(levels[k])~get(vtime),value.var="cobs")
+      med_lev[[k]]<-spread( med_levk[,c(levels[k],"cobs",vtime)] ,get(vtime),"cobs")
+      
       names_lev[[k]]<-med_lev[[k]][,1]
       med_lev[[k]]<-med_lev[[k]][,-1]
       rownames(med_lev[[k]])<-names_lev[[k]]
