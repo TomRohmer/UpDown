@@ -106,7 +106,7 @@ UpDown.out$Down$batch
 
 
 \seealso{
-\code{\link[=normalmixEM]{normalmixEM()}}, \code{\link[=mclust]{mclust()}}, \code{\link[=ksmooth]{ksmooth()}}
+\link[mixtools]{normalmixEM}, \link[mclust]{Mclust}, \link[stats]{ksmooth}
 }
 
 
